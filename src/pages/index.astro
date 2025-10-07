@@ -4,35 +4,35 @@ const siteTitle = "Attesto - Secure Exam Integrity Without Surveillance";
 const siteDescription = "Endpoint monitoring software that stops cheating tools during online exams, corporate assessments, and certification testing while respecting privacy.";
 const siteUrl = "https://attesto.ca";
 
-const rotatingWords = [
-  "cheating tools",
-  "academic dishonesty", 
-  "unauthorized software",
-  "exam violations",
-  "overlay exploits",
-  "AI assistance tools"
-];
-
 // Import Lucide icons
 import { 
   AlertCircle, 
   Shield, 
   Activity, 
   Users, 
-  Clock, 
+  Clock,
+  MonitorStop, 
   Mail, 
   Lock,
+  Logs,
+  Power,
+  ScanLine,
   ArrowRight,
   Star,
   Home,
+  Settings2,
   FileText,
   CheckCircle,
   MapPin,
   Share2,
   Send,
   Play,
+  Unlock,
   ChevronLeft,
   ChevronRight,
+  ShieldCheck,
+  Hourglass,
+  University,
   Plane
 } from 'lucide-astro';
 
@@ -193,59 +193,136 @@ import '../styles/global.css'
 
       <div class="trust-indicators">
         <div class="trust-card">
-          <Lock size={28} />
-          <div>
+        <span class="icon-flip" aria-hidden="true">
+            <Unlock class="icon-unlocked" size={28} />
+            <Lock   class="icon-locked"   size={28} />
+        </span>
+        <div>
             <div class="trust-title">Privacy Focused</div>
             <div class="trust-desc">Ensuring Student's Privacy</div>
-          </div>
         </div>
-        <div class="trust-card">
-          <Activity size={28} />
-          <div>
-            <div class="trust-title">95% Effective</div>
-            <div class="trust-desc">Stops Common Tools</div>
-          </div>
         </div>
-        <div class="trust-card">
-          <Clock size={28} />
-          <div>
-            <div class="trust-title">&lt;1s Detection</div>
-            <div class="trust-desc">Real-Time Response</div>
-          </div>
-        </div>
+
+       <div class="trust-card ecg-card">
+  <span class="ecg-animate" aria-hidden="true">
+    <Activity size={28} class="ecg-icon" />
+  </span>
+  <div>
+    <div class="trust-title">95% Effective</div>
+    <div class="trust-desc">Stops Common Tools</div>
+  </div>
+</div>
+
+      <div class="trust-card clock-card">
+  <span class="clock-spin" aria-hidden="true">
+    <Clock size={28} />
+  </span>
+  <div>
+    <div class="trust-title">&lt;1s Detection</div>
+    <div class="trust-desc">Real-Time Response</div>
+  </div>
+</div>
+
       </div>
     </div>
   </section>
 
   <!-- Problem Section -->
-  <section id="problem" class="section">
-    <div class="container">
-      <div class="problem-card">
-        <div class="section-badge">
-          <AlertCircle size={18} />
-          The Problem
-        </div>
-        <h2 class="section-title">Traditional Lockdown Browsers Aren't Enough</h2>
-        <p class="section-description">
-          Students use sophisticated overlay tools like <strong>Cluely</strong>, <strong>ChatGPT extensions</strong>, and <strong>stealth browsers</strong> that hide from screen sharing and bypass traditional lockdown browsers. These tools are invisible to webcam proctoring and standard monitoring solutions.
-        </p>
-        <div class="problem-stats">
-          <div class="stat-item">
-            <div class="stat-number">73%</div>
-            <div class="stat-label">of students admit to using AI tools</div>
+  <!-- Problem Section -->
+<section id="problem" class="section">
+  <div class="container">
+    <div class="problem-card">
+      <div class="section-badge">
+        <AlertCircle size={18} />
+        The Crisis
+      </div>
+      <h2 class="section-title">AI Cheating Tools Are Winning. Traditional Defenses Are Failing.</h2>
+      <p class="section-description">
+        In 2025, <strong>88% of students admitted using AI tools</strong> to complete assessments—with 
+        <strong>20% openly admitting to cheating</strong>. The arsenal? Over <strong>100+ "undetectable" tools</strong> 
+        like <strong>Cluely</strong> (70,000 users in 72 hours), <strong>WhisprGPT</strong>, and stealth browser extensions 
+        that bypass lockdown browsers, dodge screen sharing, and feed students real-time answers. 
+        <strong>Webcam proctoring can't see them. Respondus can't block them.</strong> 
+        And they're multiplying every semester.
+      </p>
+      
+      <!-- Updated Stats Grid -->
+    <div class="problem-stats">
+  <div class="stat-item">
+    <div class="stat-number counter" data-target="88" data-suffix="%">0%</div>
+    <div class="stat-label">of students use AI on assessments<sup><a href="#fn-1">[1]</a></sup></div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number counter" data-target="15" data-prefix="$" data-suffix="B">$0</div>
+    <div class="stat-label">global contract cheating industry value<sup><a href="#fn-2">[2]</a></sup></div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number counter" data-target="100" data-suffix="+">0+</div>
+    <div class="stat-label">active "undetectable" cheating tools<sup><a href="#fn-3">[3]</a></sup></div>
+  </div>
+</div>
+
+
+      <!-- NEW: Tool Spotlight (Optional Visual Hook) -->
+      <div class="tool-spotlight">
+        <h3 class="spotlight-title">🚨 What Your Students Are Using Right Now</h3>
+        <div class="tool-grid">
+          <div class="tool-card">
+            <strong>Cluely</strong>
+            <span>Invisible AI overlay. Reads exam screens + audio. 70K users in 3 days.</span>
           </div>
-          <div class="stat-item">
-            <div class="stat-number">$45B</div>
-            <div class="stat-label">annual cost of academic dishonesty</div>
+          <div class="tool-card">
+            <strong>WhisprGPT</strong>
+            <span>Bypasses Respondus/Honorlock. Whispers answers outside monitored browser.</span>
           </div>
-          <div class="stat-item">
-            <div class="stat-number">100+</div>
-            <div class="stat-label">known cheating overlay tools</div>
+          <div class="tool-card">
+            <strong>Browser Extensions</strong>
+            <span>Embed ChatGPT into any exam page. Activated by hotkey. Invisible to screen capture.</span>
+          </div>
+          <div class="tool-card">
+            <strong>Q&A Platforms</strong>
+            <span>Chegg, Course Hero, Brainly. Students post mid-exam, get AI answers in minutes.</span>
           </div>
         </div>
       </div>
+
+      <!-- NEW: Urgency Footer -->
+      <div class="problem-footer">
+        <p>
+          <strong>The bottom line:</strong> Traditional lockdown browsers and webcam proctors 
+          can't detect these tools. Universities are spending <strong>$196M annually</strong> 
+          just managing violations—but the cheating keeps escalating. 
+          <span class="highlight">A new approach is overdue.</span>
+        </p>
+      </div>
+
+      <section class="references" aria-labelledby="refs-title">
+  <div class="container">
+    <h3 id="refs-title" class="refs-title">References</h3>
+    <ol class="refs-list">
+      <li id="fn-1">
+        HEPI/Kortext. <em>Student Generative AI Survey 2025</em>. 
+        <a href="https://www.hepi.ac.uk/reports/student-generative-ai-survey-2025/" target="_blank" rel="noopener">Report</a>.
+      </li>
+      <li id="fn-2">
+        Eaton; Curtis (2025). Global contract cheating ≈ US$15B; also summarized by Turnitin. 
+        <a href="https://www.turnitin.com/products/feedback-studio/originality/contract-cheating" target="_blank" rel="noopener">Turnitin</a>.
+      </li>
+      <li id="fn-3">
+        Coverage of “undetectable” overlay tools (e.g., Cluely).
+        <a href="https://techcrunch.com/2025/04/29/startups-launch-products-to-catch-people-using-ai-cheating-app-cluely/" target="_blank" rel="noopener">TechCrunch</a>, 
+        <a href="https://www.businessinsider.com/cluely-ai-cheat-job-interviews-columbia-chungin-roy-lee-2025-4" target="_blank" rel="noopener">Business Insider</a>, 
+        <a href="https://cluely.com/" target="_blank" rel="noopener">Cluely Site</a>.
+      </li>
+    </ol>
+  </div>
+</section>
     </div>
-  </section>
+    
+  </div>
+  
+</section>
+
 
   <!-- Solution Section -->
   <section id="solution" class="section">
@@ -260,21 +337,25 @@ import '../styles/global.css'
       </div>
 
       <div class="solution-grid">
-        <div class="solution-card">
-          <div class="solution-icon">
-            <Clock size={32} />
-          </div>
-          <h3 class="solution-title">Automatic Activation</h3>
-          <p class="solution-desc">Triggers when exam software launches. Seamless student experience.</p>
-        </div>
+        <!-- Automatic Activation -->
+<div class="solution-card">
+  <div class="solution-icon icon-activate" aria-hidden="true">
+    <Power size={28} class="icon" />
+  </div>
+  <h3 class="solution-title">Automatic Activation</h3>
+  <p class="solution-desc">Triggers when exam software launches. Seamless student experience.</p>
+</div>
 
-        <div class="solution-card">
-          <div class="solution-icon">
-            <Activity size={32} />
-          </div>
-          <h3 class="solution-title">Real-Time Detection</h3>
-          <p class="solution-desc">Sub-second process termination. No unauthorized tools run during exams.</p>
-        </div>
+<!-- Real-Time Detection -->
+<div class="solution-card">
+  <div class="solution-icon icon-detect" aria-hidden="true">
+    <ScanLine size={28} class="icon" />
+    <!-- If ScanLine isn’t available: <Scan size={28} class="icon" /> -->
+  </div>
+  <h3 class="solution-title">Real-Time Detection</h3>
+  <p class="solution-desc">Sub-second process termination. No unauthorized tools run during exams.</p>
+</div>
+
 
         <div class="solution-card">
           <div class="solution-icon">
@@ -368,7 +449,7 @@ import '../styles/global.css'
             <div class="carousel-item">
               <div class="demo-card">
                 <div class="image-placeholder">
-                  <FileText size={48} />
+                  <Logs size={48} />
                   <span>Audit Logs</span>
                 </div>
                 <div class="demo-caption">
@@ -403,7 +484,7 @@ import '../styles/global.css'
       <div class="features-grid">
         <div class="feature-card">
           <div class="feature-icon">
-            <Activity size={28} />
+            <MonitorStop size={28} />
           </div>
           <h3 class="feature-title">Real-time Monitoring</h3>
           <p class="feature-desc">Sub-second process detection and termination</p>
@@ -411,7 +492,7 @@ import '../styles/global.css'
 
         <div class="feature-card">
           <div class="feature-icon">
-            <FileText size={28} />
+            <Settings2 size={28} />
           </div>
           <h3 class="feature-title">Dynamic Whitelist</h3>
           <p class="feature-desc">Configurable permitted applications via admin UI</p>
@@ -435,7 +516,7 @@ import '../styles/global.css'
 
         <div class="feature-card">
           <div class="feature-icon">
-            <FileText size={28} />
+            <Logs size={28} />
           </div>
           <h3 class="feature-title">Comprehensive Logging</h3>
           <p class="feature-desc">Detailed CSV audit trails for compliance</p>
@@ -446,7 +527,7 @@ import '../styles/global.css'
             <CheckCircle size={28} />
           </div>
           <h3 class="feature-title">Platform Compatible</h3>
-          <p class="feature-desc">Works with Respondus, ExamSoft, ProctorU</p>
+          <p class="feature-desc">Works with Respondus, ExamSoft, ProctorU, Examity, Amazon Chime and More!!</p>
         </div>
       </div>
     </div>
@@ -466,7 +547,7 @@ import '../styles/global.css'
       <div class="built-for-grid">
         <div class="built-for-card">
           <div class="built-for-icon">
-            <Home size={36} />
+            <University size={36} />
           </div>
           <h3 class="built-for-title">University Exam Labs</h3>
           <p class="built-for-desc">Computer science departments, testing centers, and certification facilities requiring managed device security.</p>
@@ -482,7 +563,7 @@ import '../styles/global.css'
 
         <div class="built-for-card">
           <div class="built-for-icon">
-            <FileText size={36} />
+            <ShieldCheck size={36} />
           </div>
           <h3 class="built-for-title">Certification Bodies</h3>
           <p class="built-for-desc">Professional licensing exams, standardized testing, and high-stakes assessment integrity.</p>
@@ -510,7 +591,7 @@ import '../styles/global.css'
           <ul class="roadmap-list">
             <li>Server-side logging</li>
             <li>Cloud storage</li>
-            <li>Analytics dashboard</li>
+            <li>Analytics / Admin dashboard</li>
           </ul>
         </div>
 
@@ -526,11 +607,12 @@ import '../styles/global.css'
 
         <div class="roadmap-card">
           <div class="roadmap-quarter">Q3 2026</div>
-          <h3 class="roadmap-title">Webcam Integration</h3>
+          <h3 class="roadmap-title">System Integrity</h3>
           <ul class="roadmap-list">
             <li>Proctoring partnerships</li>
-            <li>Face detection</li>
             <li>Enhanced VM detection</li>
+            <li>DLL Injection Protection</li>
+            <li>SSO Integration</li>
           </ul>
         </div>
 
@@ -541,6 +623,7 @@ import '../styles/global.css'
             <li>LMS plugins</li>
             <li>RESTful API</li>
             <li>Multi-tenant architecture</li>
+            <li>And More (this is not exhaustive)</li>
           </ul>
         </div>
       </div>
@@ -561,9 +644,6 @@ import '../styles/global.css'
             <a href="#contact" class="btn-primary btn-large">
               <Plane size={20} />
               Request Early Access
-            </a>
-            <a href="#problem" class="btn-secondary btn-large">
-              Learn More
             </a>
           </div>
         </div>
@@ -607,7 +687,7 @@ import '../styles/global.css'
               <div class="form-group">
                 <label for="role">Role *</label>
                 <select id="role" name="role" required>
-            <option value="" selected disabled hidden>Select your role</option>
+                <option value="" selected disabled hidden>Select your role</option>
                   <option value="university">University Administrator</option>
                   <option value="corporate">Corporate HR/Training</option>
                   <option value="certification">Certification Body</option>
@@ -647,7 +727,7 @@ import '../styles/global.css'
           </div>
 
           <div class="info-card">
-            <Clock size={24} />
+            <Hourglass size={24} />
             <div>
               <div class="info-label">Response Time</div>
               <div class="info-value">Within 24 hours</div>
@@ -767,6 +847,49 @@ import '../styles/global.css'
       ticking = true;
     }
   }
+
+    /* ========= Counter dials ========= */
+  function animateCounter(el, duration = 1200) {
+    const target = Number(el.getAttribute('data-target') || 0);
+    const prefix = el.getAttribute('data-prefix') || '';
+    const suffix = el.getAttribute('data-suffix') || '';
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReduced || duration <= 0) {
+      el.textContent = `${prefix}${target}${suffix}`;
+      return;
+    }
+
+    let start = null;
+    const startVal = 0;
+
+    function step(ts) {
+      if (!start) start = ts;
+      const p = Math.min((ts - start) / duration, 1);
+      // easeOutCubic
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = Math.floor(startVal + (target - startVal) * eased);
+      el.textContent = `${prefix}${val}${suffix}`;
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  // Trigger when the stats block first enters the viewport
+  const counters = document.querySelectorAll('.counter');
+  if (counters.length) {
+    const obs = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target, 1400);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+
+    counters.forEach(el => obs.observe(el));
+  }
+
 
   function updateOnScroll() {
     const y = lastKnownY;

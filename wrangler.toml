@@ -1,0 +1,7 @@
+name = "attesto-landing"
+compatibility_date = "2025-10-07"
+
+# tell Wrangler to deploy your static dist/ output
+[assets]
+directory = "./dist"
+html_handling = "auto"  # serves index.html on route folders

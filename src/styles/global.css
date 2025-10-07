@@ -33,6 +33,88 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Tool Spotlight - NEW */
+.tool-spotlight {
+  margin-top: 48px;
+  padding-top: 48px;
+  border-top: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.spotlight-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #fca5a5;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.tool-card {
+  padding: 20px;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.tool-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(239, 68, 68, 0.5);
+  background: rgba(239, 68, 68, 0.12);
+}
+
+.tool-card strong {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ef4444;
+}
+
+.tool-card span {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Problem Footer - NEW */
+.problem-footer {
+  margin-top: 40px;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border-left: 4px solid #ef4444;
+}
+
+.problem-footer p {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.problem-footer .highlight {
+  color: #fca5a5;
+  font-weight: 700;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .tool-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .spotlight-title {
+    font-size: 20px;
+  }
+}
+
 /* Your existing styles… */
 .form-group select {
   color: var(--text-primary);                 /* closed state stays white */
@@ -502,6 +584,183 @@ body {
   max-width: 900px;
   margin: 0 auto;
 }
+/* Icon flip container (same footprint as a single icon) */
+.icon-flip {
+  position: relative;
+  width: 28px;  /* match your icon size */
+  height: 28px;
+  display: inline-block;
+  perspective: 600px; /* subtle 3D */
+  color: var(--primary);
+}
+
+/* Base for both states */
+.icon-flip > svg {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 50%;
+  transition:
+    opacity .35s ease,
+    transform .45s cubic-bezier(.22,.61,.36,1);
+  will-change: transform, opacity;
+}
+
+/* Start with UNLOCKED visible, LOCKED hidden */
+.icon-unlocked { opacity: 1;  transform: rotateY(0deg); }
+.icon-locked   { opacity: 0;  transform: rotateY(-90deg); }
+
+/* On hover/focus-within of the card: swap states with a flip */
+.trust-card:hover .icon-unlocked,
+.trust-card:focus-within .icon-unlocked {
+  opacity: 0;
+  transform: rotateY(90deg);
+}
+
+.trust-card:hover .icon-locked,
+.trust-card:focus-within .icon-locked {
+  opacity: 1;
+  transform: rotateY(0deg);
+}
+
+/* Reduced motion: no rotation, just instant swap */
+@media (prefers-reduced-motion: reduce) {
+  .icon-flip > svg {
+    transition: opacity .1s linear;
+    transform: none !important;
+  }
+}
+
+.trust-card:hover .icon-locked {
+  animation: lock-pop .28s cubic-bezier(.17,.67,.41,1.35) .15s both;
+}
+@keyframes lock-pop {
+  0%   { transform: scale(.9) }
+  60%  { transform: scale(1.05) }
+  100% { transform: scale(1) }
+}
+
+/* ECG hover animation for Lucide `Activity` icon */
+.ecg-animate {
+  display: inline-block;
+  color: var(--primary);
+}
+
+/* Ensure Lucide’s SVG is ready for stroke animation */
+.ecg-animate svg {
+  overflow: visible;
+}
+
+/* Animate the main path like a moving heartbeat */
+.ecg-animate svg path {
+  /* Lucide already sets stroke props, we just ensure consistency */
+  stroke: currentColor;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  /* Magic: the dash length should be larger than the icon’s path length.
+     Tweak 60–120 depending on the size; 80 works well for 24–32px icons. */
+  stroke-dasharray: 80;
+  stroke-dashoffset: 80;
+
+  transition: filter .25s ease, opacity .25s ease;
+}
+
+/* Start paused; run when the card is hovered/focused */
+.ecg-card .ecg-animate svg path {
+  animation: ecg-flow 1.6s cubic-bezier(.22,.61,.36,1) infinite;
+  animation-play-state: paused;
+}
+
+/* Hover/focus: flow + soft neon glow */
+.ecg-card:hover .ecg-animate svg path,
+.ecg-card:focus-within .ecg-animate svg path {
+  animation-play-state: running;
+  filter: drop-shadow(0 0 6px rgba(20,184,166,.55));
+}
+
+/* Reduced motion: just a gentle colour pop, no motion */
+@media (prefers-reduced-motion: reduce) {
+  .ecg-card .ecg-animate svg path {
+    animation: none !important;
+  }
+  .ecg-card:hover .ecg-animate svg path {
+    filter: drop-shadow(0 0 4px rgba(20,184,166,.35));
+  }
+}
+
+/* Keyframes: move the dash across the path (left → right) */
+@keyframes ecg-flow {
+  0%   { stroke-dashoffset: 80;   opacity: .95; }
+  45%  { stroke-dashoffset: 0;    opacity: 1;   }
+  55%  { stroke-dashoffset: -6;   opacity: 1;   } /* tiny overshoot for snap */
+  100% { stroke-dashoffset: -80;  opacity: .95; }
+}
+.ecg-animate {
+  position: relative;
+}
+
+/* a small dot that travels horizontally while we hover */
+.ecg-card:hover .ecg-animate::after,
+.ecg-card:focus-within .ecg-animate::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  transform: translate(-2px, -50%);
+  background: currentColor;
+  box-shadow: 0 0 10px currentColor;
+  animation: ecg-dot 1.6s cubic-bezier(.22,.61,.36,1) infinite;
+}
+
+@keyframes ecg-dot {
+  0%   { left: 0%;   opacity: 0; transform: translate(-2px, -50%) scale(.8); }
+  10%  { opacity: 1; }
+  50%  { left: 50%;  transform: translate(-2px, -50%) scale(1.05); }
+  90%  { opacity: 1; }
+  100% { left: 100%; opacity: 0; transform: translate(-2px, -50%) scale(.9); }
+}
+
+/* clock hover animation */
+.clock-spin {
+  display: inline-block;
+  color: var(--primary);
+}
+.clock-spin svg {
+  /* make rotation center correct in all browsers */
+  transform-origin: 50% 50%;
+  transform-box: fill-box;
+  transition: filter .25s ease;
+}
+
+/* run while hovered/focused */
+.clock-card:hover .clock-spin svg,
+.clock-card:focus-within .clock-spin svg {
+  animation: clock-spin 1.2s cubic-bezier(.22,.61,.36,1) infinite;
+  filter: drop-shadow(0 0 6px rgba(20,184,166,.45));
+}
+
+@keyframes clock-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* reduced motion: no spin, just subtle colour pop */
+@media (prefers-reduced-motion: reduce) {
+  .clock-card:hover .clock-spin svg,
+  .clock-card:focus-within .clock-spin svg {
+    animation: none !important;
+    filter: drop-shadow(0 0 4px rgba(20,184,166,.3));
+  }
+}
+.clock-card:hover .clock-tick svg,
+.clock-card:focus-within .clock-tick svg {
+  animation: clock-spin 1.2s steps(12, end) infinite;
+}
+
 
 .trust-card {
   display: flex;
@@ -566,6 +825,7 @@ body {
   font-weight: 900;
   color: #ef4444;
   margin-bottom: 8px;
+  font-variant-numeric: tabular-nums; letter-spacing: .5px;
 }
 
 .stat-label {
@@ -676,6 +936,112 @@ body {
   display: flex;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* ---------- Automatic Activation: power ripple ---------- */
+.icon-activate {
+  position: relative;
+  isolation: isolate; /* keep ripple under the icon */
+}
+.icon-activate .icon {
+  transform-origin: 50% 50%;
+  transition: transform .28s cubic-bezier(.22,.61,.36,1),
+              filter .28s ease;
+}
+
+/* subtle press/glow on card hover */
+.solution-card:hover .icon-activate .icon,
+.solution-card:focus-within .icon-activate .icon {
+  transform: rotate(-8deg) scale(1.04);
+  filter: drop-shadow(0 0 10px rgba(20,184,166,.45));
+}
+
+/* expanding ripple ring */
+.icon-activate::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 64px;
+  height: 64px;
+  border-radius: 999px;
+  border: 2px solid rgba(20,184,166,.35);
+  opacity: 0;
+  transform: scale(.6);
+  transition: none;
+  pointer-events: none;
+  z-index: -1;
+}
+.solution-card:hover .icon-activate::after,
+.solution-card:focus-within .icon-activate::after {
+  animation: activate-ripple 900ms cubic-bezier(.2,.7,.3,1) 1;
+}
+@keyframes activate-ripple {
+  0%   { opacity: .0; transform: scale(.6); }
+  10%  { opacity: .45; }
+  100% { opacity: 0;   transform: scale(1.35); }
+}
+
+/* ---------- Real-Time Detection: radar sweep ---------- */
+.icon-detect {
+  position: relative;
+  overflow: hidden;
+}
+.icon-detect .icon {
+  position: relative;
+  z-index: 1;
+  transform-origin: 50% 50%;
+  transition: filter .25s ease;
+}
+
+/* sweeping light bar */
+.icon-detect::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg,
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,.25) 40%,
+      rgba(255,255,255,0) 80%);
+  mix-blend-mode: screen;           /* subtle “scan” sheen */
+  transform: translateX(-120%);
+  opacity: 0;
+  pointer-events: none;
+}
+.solution-card:hover .icon-detect::before,
+.solution-card:focus-within .icon-detect::before {
+  animation: detect-sweep 1.4s cubic-bezier(.22,.61,.36,1) infinite;
+  opacity: 1;
+}
+.solution-card:hover .icon-detect .icon,
+.solution-card:focus-within .icon-detect .icon {
+  filter: drop-shadow(0 0 8px rgba(99,102,241,.45));
+}
+
+@keyframes detect-sweep {
+  0%   { transform: translateX(-120%); }
+  100% { transform: translateX(120%);  }
+}
+
+/* Accessibility: prefer-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .solution-card:hover .icon-activate .icon,
+  .solution-card:focus-within .icon-activate .icon {
+    transform: none;
+  }
+  .solution-card:hover .icon-activate::after,
+  .solution-card:focus-within .icon-activate::after {
+    animation: none;
+  }
+  .solution-card:hover .icon-detect::before,
+  .solution-card:focus-within .icon-detect::before {
+    animation: none;
+    opacity: .15; /* faint static sheen */
+  }
+}
+
+
+
 
 .carousel-item {
   min-width: 100%;
@@ -1344,3 +1710,9 @@ body {
   scrollbar-width: thin;
   scrollbar-color: var(--primary) var(--bg-dark);
 }
+
+.references { padding-top: 24px; }
+.refs-title { font-size: 16px; letter-spacing: .06em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px; }
+.refs-list { font-size: 13.5px; color: var(--text-secondary); line-height: 1.7; counter-reset: refs; padding-left: 18px; }
+.refs-list a { color: var(--primary); }
+.section-description sup { font-size: .8em; vertical-align: super; }
