@@ -33,7 +33,11 @@ import {
   ShieldCheck,
   Hourglass,
   University,
-  Plane
+  Plane,
+  Layers,
+  Cpu,
+  Network,
+  Eye
 } from 'lucide-astro';
 
 import '../styles/global.css'
@@ -309,7 +313,7 @@ import '../styles/global.css'
         <a href="https://www.turnitin.com/products/feedback-studio/originality/contract-cheating" target="_blank" rel="noopener">Turnitin</a>.
       </li>
       <li id="fn-3">
-        Coverage of “undetectable” overlay tools (e.g., Cluely).
+        Coverage of "undetectable" overlay tools (e.g., Cluely).
         <a href="https://techcrunch.com/2025/04/29/startups-launch-products-to-catch-people-using-ai-cheating-app-cluely/" target="_blank" rel="noopener">TechCrunch</a>, 
         <a href="https://www.businessinsider.com/cluely-ai-cheat-job-interviews-columbia-chungin-roy-lee-2025-4" target="_blank" rel="noopener">Business Insider</a>, 
         <a href="https://cluely.com/" target="_blank" rel="noopener">Cluely Site</a>.
@@ -350,7 +354,7 @@ import '../styles/global.css'
 <div class="solution-card">
   <div class="solution-icon icon-detect" aria-hidden="true">
     <ScanLine size={28} class="icon" />
-    <!-- If ScanLine isn’t available: <Scan size={28} class="icon" /> -->
+    <!-- If ScanLine isn't available: <Scan size={28} class="icon" /> -->
   </div>
   <h3 class="solution-title">Real-Time Detection</h3>
   <p class="solution-desc">Sub-second process termination. No unauthorized tools run during exams.</p>
@@ -467,6 +471,122 @@ import '../styles/global.css'
       </div>
 
       <div class="carousel-dots" id="carouselDots"></div>
+
+      <!-- NEW: Technical Architecture Overview -->
+      <div class="tech-overview">
+        <div class="tech-header">
+          <div class="tech-badge">
+            <Layers size={18} />
+            Technical Architecture
+          </div>
+          <h3 class="tech-title">Three-Layer Security Model</h3>
+          <p class="tech-subtitle">Kernel-adjacent enforcement that operates at the OS level—beyond browser-based solutions</p>
+        </div>
+
+        <div class="tech-layers">
+          <!-- Layer 1: Application Level -->
+          <div class="tech-layer">
+            <div class="layer-number">Layer 1</div>
+            <div class="layer-icon">
+              <Cpu size={32} />
+            </div>
+            <h4 class="layer-title">Application-Level Enforcement</h4>
+            <p class="layer-desc">
+              Process termination engine scans running processes every <strong>500ms</strong> via 
+              <code>CreateToolhelp32Snapshot</code>. Non-compliant executables are terminated with 
+              <code>PROCESS_TERMINATE</code> rights. Windows <strong>Job Objects</strong> contain 
+              processes and automatically kill child spawns—preventing fork/escape techniques.
+            </p>
+            <div class="layer-features">
+              <div class="layer-feature">
+                <CheckCircle size={16} />
+                <span>Dynamic allowlist management</span>
+              </div>
+              <div class="layer-feature">
+                <CheckCircle size={16} />
+                <span>Stealth window detection (opacity, off-screen positioning)</span>
+              </div>
+              <div class="layer-feature">
+                <CheckCircle size={16} />
+                <span>Sub-second violation response</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Layer 2: Hardware & VM Detection -->
+          <div class="tech-layer">
+            <div class="layer-number">Layer 2</div>
+            <div class="layer-icon">
+              <Eye size={32} />
+            </div>
+            <h4 class="layer-title">Virtualization & Hardware Tampering</h4>
+            <p class="layer-desc">
+              Multi-method VM detection via <strong>WMI queries</strong>, registry key analysis 
+              (<code>HKLM\SYSTEM\CurrentControlSet\Services\VBoxGuest</code>), and MAC address 
+              fingerprinting. Detects VirtualBox, VMware, Hyper-V. Remote Desktop detection via 
+              <code>WTSEnumerateSessions</code> and clipboard redirection monitoring.
+            </p>
+            <div class="layer-features">
+              <div class="layer-feature">
+                <CheckCircle size={16} />
+                <span>VM hypervisor fingerprinting</span>
+              </div>
+              <div class="layer-feature">
+                <CheckCircle size={16} />
+                <span>RDP/TeamViewer session detection</span>
+              </div>
+              <div class="layer-feature">
+                <CheckCircle size={16} />
+                <span>Hardware-level tamper checks</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Layer 3: Network Filtering (V2) -->
+          <div class="tech-layer tech-layer-roadmap">
+            <div class="layer-number">Layer 3</div>
+            <div class="layer-icon">
+              <Network size={32} />
+            </div>
+            <h4 class="layer-title">Network-Level Enforcement <span class="layer-badge-v2">V2 2026</span></h4>
+            <p class="layer-desc">
+              <strong>Windows Filtering Platform (WFP)</strong> kernel callout driver intercepts packets 
+              before network adapter transmission. Domain blacklist (chatgpt.com, claude.ai, chegg.com) 
+              enforced at <strong>DNS/SNI layer</strong>. VPN/tunnel detection via TAP adapter enumeration 
+              and encapsulated traffic analysis (GRE, L2TP, IPSec).
+            </p>
+            <div class="layer-features">
+              <div class="layer-feature">
+                <CheckCircle size={16} />
+                <span>WFP kernel-level packet interception</span>
+              </div>
+              <div class="layer-feature">
+                <CheckCircle size={16} />
+                <span>TLS/SNI inspection (HTTPS blocking)</span>
+              </div>
+              <div class="layer-feature">
+                <CheckCircle size={16} />
+                <span>VPN/Tor/Proxy termination</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tech Stack Info -->
+        <div class="tech-stack">
+          <div class="stack-badge">
+            <Cpu size={16} />
+            Technology Stack
+          </div>
+          <div class="stack-items">
+            <span class="stack-item"><strong>Language:</strong> Rust (memory-safe systems programming)</span>
+            <span class="stack-item"><strong>Platform:</strong> Windows 10/11 (x64)</span>
+            <span class="stack-item"><strong>APIs:</strong> Win32, WMI, WFP (V2)</span>
+            <span class="stack-item"><strong>Privilege:</strong> NT AUTHORITY\SYSTEM</span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
