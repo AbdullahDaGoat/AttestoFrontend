@@ -122,19 +122,11 @@ import '../styles/global.css'
           <Users size={18} />
           Built For
         </a>
-        <a href="#roadmap" class="nav-link" data-section="roadmap">
-          <Clock size={18} />
-          Roadmap
-        </a>
-        <a href="#contact" class="nav-link" data-section="contact">
-          <Mail size={18} />
-          Contact
-        </a>
       </div>
 
-      <a href="#contact" class="btn-primary">
-        <Plane size={18} />
-        Request Access
+      <a href="#roadmap" class="btn-primary">
+          <Clock size={18} />
+          Roadmap
       </a>
     </div>
   </nav>
@@ -148,10 +140,7 @@ import '../styles/global.css'
       <a href="#demo" class="mobile-nav-btn" data-section="demo">
         <Play size={22} />
       </a>
-      <a href="#contact" class="mobile-nav-btn mobile-nav-primary">
-        <Mail size={24} />
-      </a>
-      <a href="#roadmap" class="mobile-nav-btn" data-section="roadmap">
+      <a href="#roadmap" class="mobile-nav-btn mobile-nav-primary" data-section="roadmap">
         <Clock size={22} />
       </a>
       <a href="#built-for" class="mobile-nav-btn" data-section="built-for">
@@ -185,10 +174,6 @@ import '../styles/global.css'
       </p>
 
       <div class="hero-cta">
-        <a href="#contact" class="btn-primary btn-large">
-          <Plane size={20} />
-          Request Early Access
-        </a>
         <a href="#problem" class="btn-secondary btn-large">
           Learn More
           <ArrowRight size={20} />
@@ -402,75 +387,26 @@ import '../styles/global.css'
         <p class="section-subtitle">Watch how we enforce exam integrity in real-time</p>
       </div>
 
-      <div class="demo-carousel">
-        <button class="carousel-btn carousel-btn-left" id="carouselPrev">
-          <ChevronLeft size={28} />
-        </button>
-        
-        <div class="carousel-container">
-          <div class="carousel-track" id="carouselTrack">
-            <!-- Demo Video Placeholder -->
-            <div class="carousel-item">
-              <div class="demo-card video-card">
-                <div class="video-placeholder">
-                  <Play size={64} />
-                  <span>Demo Video</span>
-                </div>
-                <div class="demo-caption">
-                  <h4>Full Product Walkthrough</h4>
-                  <p>See real-time process detection and termination</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Screenshot Placeholders -->
-            <div class="carousel-item">
-              <div class="demo-card">
-                <div class="image-placeholder">
-                  <Activity size={48} />
-                  <span>Dashboard View</span>
-                </div>
-                <div class="demo-caption">
-                  <h4>Admin Control Panel</h4>
-                  <p>Manage whitelist and view session logs</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="carousel-item">
-              <div class="demo-card">
-                <div class="image-placeholder">
-                  <Shield size={48} />
-                  <span>Active Monitoring</span>
-                </div>
-                <div class="demo-caption">
-                  <h4>Real-Time Protection</h4>
-                  <p>Watch unauthorized tools get terminated instantly</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="carousel-item">
-              <div class="demo-card">
-                <div class="image-placeholder">
-                  <Logs size={48} />
-                  <span>Audit Logs</span>
-                </div>
-                <div class="demo-caption">
-                  <h4>Comprehensive Reporting</h4>
-                  <p>Detailed CSV exports for compliance review</p>
-                </div>
-              </div>
-            </div>
+      <div class="demo-video-container">
+        <div class="demo-card video-card">
+          <div class="video-embed">
+            <iframe 
+              width="100%" 
+              height="100%" 
+              src="https://www.youtube-nocookie.com/embed/M8rBY1Qr0DU?si=8rFLienOX49zctrR" 
+              title="Attesto Product Walkthrough" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              referrerpolicy="strict-origin-when-cross-origin" 
+              allowfullscreen>
+            </iframe>
+          </div>
+          <div class="demo-caption">
+            <h4>Full Product Walkthrough</h4>
+            <p>See real-time process detection and termination</p>
           </div>
         </div>
-
-        <button class="carousel-btn carousel-btn-right" id="carouselNext">
-          <ChevronRight size={28} />
-        </button>
       </div>
-
-      <div class="carousel-dots" id="carouselDots"></div>
 
       <!-- NEW: Technical Architecture Overview -->
       <div class="tech-overview">
@@ -522,7 +458,7 @@ import '../styles/global.css'
             <h4 class="layer-title">Virtualization & Hardware Tampering</h4>
             <p class="layer-desc">
               Multi-method VM detection via <strong>WMI queries</strong>, registry key analysis 
-              (<code>HKLM\SYSTEM\CurrentControlSet\Services\VBoxGuest</code>), and MAC address 
+              (<code>HKLM\...\VBoxGuest</code>), and MAC address
               fingerprinting. Detects VirtualBox, VMware, Hyper-V. Remote Desktop detection via 
               <code>WTSEnumerateSessions</code> and clipboard redirection monitoring.
             </p>
@@ -760,99 +696,6 @@ import '../styles/global.css'
         <div class="cta-content">
           <h2 class="cta-title">Ready to <span class="gradient-text">secure</span> your exams?</h2>
           <p class="cta-description">Join the early access program for Fall 2025 deployment. Limited beta slots available.</p>
-          <div class="cta-buttons">
-            <a href="#contact" class="btn-primary btn-large">
-              <Plane size={20} />
-              Request Early Access
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="section">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-badge">
-          <Mail size={18} />
-          Get in Touch
-        </div>
-        <h2 class="section-title">Request Early Access</h2>
-        <p class="section-subtitle">Limited beta deployment slots for Fall 2025 exam season</p>
-      </div>
-
-      <div class="contact-container">
-        <!-- Envelope Form -->
-        <div class="envelope-card">
-          <div class="envelope-flap"></div>
-          <form id="contactForm" class="contact-form">
-            <div class="form-row">
-              <div class="form-group">
-                <label for="name">Full Name *</label>
-                <input type="text" id="name" name="name" required />
-              </div>
-              <div class="form-group">
-                <label for="email">Email *</label>
-                <input type="email" id="email" name="email" required />
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="organization">Organization *</label>
-                <input type="text" id="organization" name="organization" required />
-              </div>
-              <div class="form-group">
-                <label for="role">Role *</label>
-                <select id="role" name="role" required>
-                <option value="" selected disabled hidden>Select your role</option>
-                  <option value="university">University Administrator</option>
-                  <option value="corporate">Corporate HR/Training</option>
-                  <option value="certification">Certification Body</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="message">Tell us about your needs</label>
-              <textarea id="message" name="message" rows="4"></textarea>
-            </div>
-
-            <button type="submit" class="btn-primary btn-full">
-              <Send size={20} />
-              Send Request
-            </button>
-          </form>
-        </div>
-
-        <!-- Contact Info -->
-        <div class="contact-info">
-          <div class="info-card">
-            <Mail size={24} />
-            <div>
-              <div class="info-label">Email</div>
-              <div class="info-value">contact@attesto.ca</div>
-            </div>
-          </div>
-
-          <div class="info-card">
-            <MapPin size={24} />
-            <div>
-              <div class="info-label">Location</div>
-              <div class="info-value">Canada</div>
-            </div>
-          </div>
-
-          <div class="info-card">
-            <Hourglass size={24} />
-            <div>
-              <div class="info-label">Response Time</div>
-              <div class="info-value">Within 24 hours</div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -887,14 +730,12 @@ import '../styles/global.css'
             <a href="#features" class="footer-link">Features</a>
             <a href="#built-for" class="footer-link">Built For</a>
             <a href="#roadmap" class="footer-link">Roadmap</a>
-            <a href="#contact" class="footer-link">Request Access</a>
           </div>
 
           <div class="footer-column">
             <h4 class="footer-column-title">Company</h4>
             <a href="#problem" class="footer-link">Why Attesto</a>
             <a href="#solution" class="footer-link">How It Works</a>
-            <a href="#contact" class="footer-link">Contact</a>
           </div>
 
           <div class="footer-column">
@@ -1056,93 +897,6 @@ import '../styles/global.css'
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });
-
-  /* ========= Carousel ========= */
-  const track = document.getElementById('carouselTrack');
-  const prevBtn = document.getElementById('carouselPrev');
-  const nextBtn = document.getElementById('carouselNext');
-  const dotsContainer = document.getElementById('carouselDots');
-  let currentIndex = 0;
-  const totalItems = track ? track.children.length : 0;
-
-  function updateCarousel() {
-    if (!track) return;
-    track.style.transform = `translateX(-${currentIndex * 100}%)`;
-    const dots = dotsContainer ? dotsContainer.querySelectorAll('.carousel-dot') : [];
-    dots.forEach((dot, i) => {
-      dot.classList.toggle('active', i === currentIndex);
-    });
-  }
-
-  function goToSlide(index) {
-    currentIndex = (index + totalItems) % totalItems;
-    updateCarousel();
-  }
-
-  if (dotsContainer && totalItems > 0) {
-    for (let i = 0; i < totalItems; i++) {
-      const dot = document.createElement('button');
-      dot.classList.add('carousel-dot');
-      if (i === 0) dot.classList.add('active');
-      dot.addEventListener('click', () => goToSlide(i));
-      dotsContainer.appendChild(dot);
-    }
-  }
-
-  prevBtn?.addEventListener('click', () => goToSlide(currentIndex - 1));
-  nextBtn?.addEventListener('click', () => goToSlide(currentIndex + 1));
-
-  // Touch swipe
-  let touchStartX = 0;
-  let touchEndX = 0;
-  track?.addEventListener('touchstart', e => {
-    touchStartX = e.changedTouches[0].screenX;
-  }, { passive: true });
-  track?.addEventListener('touchend', e => {
-    touchEndX = e.changedTouches[0].screenX;
-    const dx = touchStartX - touchEndX;
-    if (dx > 50) goToSlide(currentIndex + 1);
-    if (dx < -50) goToSlide(currentIndex - 1);
-  }, { passive: true });
-
-  /* ========= Contact form ========= */
-  const contactForm = document.getElementById('contactForm');
-  contactForm?.addEventListener('submit', async e => {
-    e.preventDefault();
-    if (!(contactForm instanceof HTMLFormElement)) return;
-
-    const formData = new FormData(contactForm);
-    const data = Object.fromEntries(formData);
-
-    try {
-      console.log('Form data:', data);
-      alert("Thank you! We'll be in touch soon.");
-      contactForm.reset();
-    } catch (error) {
-      console.error('Form submission error:', error);
-      alert('Something went wrong. Please try again.');
-    }
-  });
-
-  /* ========= Share button ========= */
-  const shareButton = document.getElementById('shareButton');
-  shareButton?.addEventListener('click', async () => {
-    const shareData = {
-      title: 'Attesto - Secure Exam Integrity',
-      text: "Endpoint monitoring software that stops cheating tools during exams while respecting privacy.",
-      url: window.location.href
-    };
-    try {
-      if (navigator.share) {
-        await navigator.share(shareData);
-      } else {
-        await navigator.clipboard.writeText(`${shareData.title}\n${shareData.text}\n${shareData.url}`);
-        alert('Link copied to clipboard!');
-      }
-    } catch (err) {
-      console.error('Error sharing:', err);
-    }
-  });
 
   /* ========= Init on load ========= */
   document.addEventListener('DOMContentLoaded', () => {
